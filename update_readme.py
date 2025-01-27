@@ -50,8 +50,8 @@ def update_readme_file(readme_content, new_sections):
         updated_content.append('\n')
     return "\n".join(updated_content)
 
-def main(chnaged_file_path):
-    with open(chnaged_file_path, 'r') as file:
+def main(changed_file_path):
+    with open(changed_file_path, 'r') as file:
         changed_files = [line.strip() for line in file if line.strip().endswith('.py')]
         
     if not changed_files:
