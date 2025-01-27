@@ -11,26 +11,26 @@ on:
 jobs:
   updates_readme:
     runs-on: ubuntu-latest
-  
-  steps:
-  - name: Checkout Code
-    uses: actions/checkout@latest 
 
-  - name: Detect Changes
-    id: changes
-    run: |
-      git diff --name-only ${{ github.event.before }} ${{ github.sha }} > changed_files.txt
-  
-  - name: Update Readme 
-    env:
-      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-    run: |
-      python update_readme.py --changed-files changed_files.txt 
-    
-  - name: Commit and Push Changes 
-    run: |
-      git config user.name "Grokr-gyanendra"
-      git config user.email "gyanendra.shukla@datagrokr.co"
-      git add README.md
-      git commit -m "Automated update to README.md" || echo "No changes to commit."
-      git push
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@latest
+
+    - name: Detect Changes
+      id: changes
+      run: |
+        git diff --name-only ${{ github.event.before }} ${{ github.sha }} > changed_files.txt
+
+    - name: Update Readme
+      env:
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      run: |
+        python update_readme.py --changed-files changed_files.txt
+
+    - name: Commit and Push Changes
+      run: |
+        git config user.name "Grokr-gyanendra"
+        git config user.email "gyanendra.shukla@datagrokr.co"
+        git add README.md
+        git commit -m "Automated update to README.md" || echo "No changes to commit."
+        git push
